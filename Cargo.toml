@@ -4,6 +4,15 @@ version = "0.1.0"
 authors = ["Xavier GILLARD <xaviergillard@gmail.com>"]
 description = "Anycat is a tool that tries to cat (print to stdout) a file while unpacking it with the appropriate decompression algorithm"
 
+homepage = "https://github.com/xgillard/anycat"
+repository = "https://github.com/xgillard/anycat.git"
+readme = "README.md"
+
+categories = [ "decompress", "cat", "tool", "command-line" ]
+license = "MIT"
+
+maintenance = { status = "as-is" }
+
 [dependencies]
 clap   = "*"
 
