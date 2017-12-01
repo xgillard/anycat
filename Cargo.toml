@@ -8,7 +8,7 @@ homepage = "https://github.com/xgillard/anycat"
 repository = "https://github.com/xgillard/anycat.git"
 readme = "README.md"
 
-categories = [ "decompress", "cat", "tool", "command-line" ]
+categories = [ "command-line-utilities", "compression" ]
 license = "MIT"
 
 maintenance = { status = "as-is" }
