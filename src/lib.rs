@@ -27,24 +27,24 @@ pub fn readfile(fname: &str) -> Box<BufRead> {
 
     let canonical = fname.to_lowercase();
 
+    // I'm sure about these ones
     if canonical.ends_with(".gz") || canonical.ends_with(".gzip") {
         return Box::new(BufReader::new(GzDecoder::new(file)));
     }
+    if canonical.ends_with(".bz2") || canonical.ends_with(".bzip") {
+        return Box::new(BufReader::new(BzDecoder::new(file)));
+    }
+    if canonical.ends_with(".xz") || canonical.ends_with(".lzma") {
+        return Box::new(BufReader::new(XzDecoder::new(file)));
+    }
+
+    // I *guess* about these ones...
     if canonical.ends_with(".zlib") || canonical.ends_with(".z") {
         return Box::new(BufReader::new(ZlibDecoder::new(file)));
     }
     if canonical.ends_with(".dfl") {
         return Box::new(BufReader::new(DeflateDecoder::new(file)));
     }
-
-    if canonical.ends_with(".bz2") || canonical.ends_with(".bzip") {
-        return Box::new(BufReader::new(BzDecoder::new(file)));
-    }
-
-    if canonical.ends_with(".lzma") || canonical.ends_with(".xz2") {
-        return Box::new(BufReader::new(XzDecoder::new(file)));
-    }
-
     if canonical.ends_with(".brotli") || canonical.ends_with(".br") {
         return Box::new(BufReader::new(BrotliDecoder::new(file)));
     }
