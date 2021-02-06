@@ -16,9 +16,14 @@ fn main() {
 
     let args = app.get_matches();
 
-    let x = anycat::readfile(args.value_of("file").unwrap());
-
-    for l in x.lines() {
-        println!("{}", l.unwrap());
+    let fname= args.value_of("file").unwrap();
+    
+    match anycat::readfile(fname) {
+        Err(e)=> {println!("Could not open {}. \nReason: {:?}", fname, e);}
+        Ok(x) => {
+                for l in x.lines() {
+                println!("{}", l.unwrap());
+            }
+        }
     }
 }

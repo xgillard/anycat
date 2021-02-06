@@ -1,22 +1,22 @@
 [package]
-name = "anycat"
-version = "0.1.2"
-authors = ["Xavier GILLARD <xaviergillard@gmail.com>"]
-description = "Anycat is a tool that tries to cat (print to stdout) a file while unpacking it with the appropriate decompression algorithm"
+name        = "anycat"
+version     = "0.2.0"
+authors     = ["Xavier GILLARD <xaviergillard@gmail.com>"]
+description = "Anycat is an extremely simple crate and tool that lets you unpack some single file archive and print its content to the standard output (or process it as a regular `BufRead`)."
 
-homepage = "https://github.com/xgillard/anycat"
-repository = "https://github.com/xgillard/anycat.git"
-readme = "README.md"
+homepage    = "https://github.com/xgillard/anycat"
+repository  = "https://github.com/xgillard/anycat.git"
+readme      = "README.md"
 
-categories = [ "command-line-utilities", "compression" ]
-license = "MIT"
+categories  = [ "command-line-utilities", "compression" ]
+license     = "MIT"
 
 maintenance = { status = "as-is" }
 
 [dependencies]
 clap   = "2.28.0"
 
-flate2 = "1.0.6"
-bzip2  = "0.3.3"
+flate2 = "1.0.20"
+bzip2  = "0.4.1"
 xz2    = "0.1.6"
 brotli2= "0.3.2"

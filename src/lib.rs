@@ -22,32 +22,32 @@ use brotli2::read::*;
 /// - .br , .brotli => BROTLI
 ///
 /// Otherwise, the file is assumed to contain plaintext and is treated as such
-pub fn readfile(fname: &str) -> Box<BufRead> {
-    let file = File::open(fname).expect(&format!("Could not open {}", fname));
+pub fn readfile(fname: &str) -> Result<Box<dyn BufRead + Send>, std::io::Error> {
+    let file = File::open(fname)?;
 
     let canonical = fname.to_lowercase();
 
     // I'm sure about these ones
     if canonical.ends_with(".gz") || canonical.ends_with(".gzip") {
-        return Box::new(BufReader::new(GzDecoder::new(file)));
+        return Ok(Box::new(BufReader::new(GzDecoder::new(file))));
     }
     if canonical.ends_with(".bz2") || canonical.ends_with(".bzip") {
-        return Box::new(BufReader::new(BzDecoder::new(file)));
+        return Ok(Box::new(BufReader::new(BzDecoder::new(file))));
     }
     if canonical.ends_with(".xz") || canonical.ends_with(".lzma") {
-        return Box::new(BufReader::new(XzDecoder::new(file)));
+        return Ok(Box::new(BufReader::new(XzDecoder::new(file))));
     }
 
     // I *guess* about these ones...
     if canonical.ends_with(".zlib") || canonical.ends_with(".z") {
-        return Box::new(BufReader::new(ZlibDecoder::new(file)));
+        return Ok(Box::new(BufReader::new(ZlibDecoder::new(file))));
     }
     if canonical.ends_with(".dfl") {
-        return Box::new(BufReader::new(DeflateDecoder::new(file)));
+        return Ok(Box::new(BufReader::new(DeflateDecoder::new(file))));
     }
     if canonical.ends_with(".brotli") || canonical.ends_with(".br") {
-        return Box::new(BufReader::new(BrotliDecoder::new(file)));
+        return Ok(Box::new(BufReader::new(BrotliDecoder::new(file))));
     }
 
-    return Box::new(BufReader::new(file));
+    return Ok(Box::new(BufReader::new(file)));
 }
